@@ -1,4 +1,7 @@
 {
    "language" : "Language ",
-   "mode" : "Mode"
+   "mode" : "Mode",
+    "light" : "Light",
+    "theme_title" : "Theme",
+     "dark" : "Dark"
 }
