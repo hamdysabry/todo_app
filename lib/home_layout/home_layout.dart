@@ -31,10 +31,13 @@ class _HomeLayoutState extends State<HomeLayout> {
         onPressed: () {
           showAddTaskBottomSheet();
         },
-        child: Icon(Icons.add),
-        shape: const StadiumBorder(
-            side: BorderSide(
+        child: Icon(
+          Icons.add,
           color: Colors.white,
+        ),
+        shape: StadiumBorder(
+            side: BorderSide(
+          color: Theme.of(context).accentColor,
           width: 4,
         )),
       ),
@@ -59,6 +62,7 @@ class _HomeLayoutState extends State<HomeLayout> {
 
   void showAddTaskBottomSheet() {
     showModalBottomSheet(
+      backgroundColor: Theme.of(context).accentColor,
       context: context,
       isScrollControlled: true,
       builder: (context) => Padding(

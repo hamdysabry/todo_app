@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_app/pages/setting_page/widget/language_bottom_sheet.dart';
+import 'package:todo_app/pages/setting_page/widget/theme_mode_bottom_sheet.dart';
 import 'package:todo_app/shared-components/theme/color.dart';
+
+import '../../provider/setting_provider.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -13,6 +17,7 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
+    var provider = Provider.of<SettingProvider>(context);
     var theme = Theme.of(context);
     var applocal = AppLocalizations.of(context);
     return Container(
@@ -22,7 +27,8 @@ class _SettingPageState extends State<SettingPage> {
         children: [
           Text(
             applocal!.language,
-            style: theme.textTheme.bodyMedium!.copyWith(color: Colors.black),
+            style: theme.textTheme.bodySmall!
+                .copyWith(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10.0),
           InkWell(
@@ -33,7 +39,7 @@ class _SettingPageState extends State<SettingPage> {
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: primaryColor,
@@ -43,7 +49,7 @@ class _SettingPageState extends State<SettingPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "English",
+                    provider.currentlanguage == "en" ? "English" : "عربي",
                     style: theme.textTheme.bodySmall!
                         .copyWith(color: primaryColor),
                   ),
@@ -60,18 +66,19 @@ class _SettingPageState extends State<SettingPage> {
           ),
           Text(
             applocal!.mode,
-            style: theme.textTheme.bodyMedium!.copyWith(color: Colors.black),
+            style: theme.textTheme.bodySmall!
+                .copyWith(fontSize: 22, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10.0),
           InkWell(
             onTap: () {
-              //showthemeBottomSheet();
+              showthememodeBottomSheet();
             },
             child: Container(
               padding: EdgeInsets.all(12),
               margin: EdgeInsets.symmetric(horizontal: 16),
               decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: primaryColor,
@@ -81,7 +88,9 @@ class _SettingPageState extends State<SettingPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Light",
+                    provider.isDark()
+                        ? AppLocalizations.of(context)!.dark
+                        : AppLocalizations.of(context)!.light,
                     style: theme.textTheme.bodySmall!
                         .copyWith(color: primaryColor),
                   ),
@@ -101,5 +110,10 @@ class _SettingPageState extends State<SettingPage> {
   void showthemeBottomSheet() {
     showModalBottomSheet(
         context: context, builder: (context) => LanguageBottomSheet());
+  }
+
+  void showthememodeBottomSheet() {
+    showModalBottomSheet(
+        context: context, builder: (context) => ModeBottomSheet());
   }
 }
