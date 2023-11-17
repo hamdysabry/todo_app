@@ -55,14 +55,11 @@ class _ModeBottomSheetState extends State<ModeBottomSheet> {
         children: [
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .bodySmall
-                ?.copyWith(color: Theme.of(context).accentColor),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
           Icon(
             Icons.check,
-            color: Theme.of(context).accentColor,
+            color: primaryColor,
           )
         ],
       ),
