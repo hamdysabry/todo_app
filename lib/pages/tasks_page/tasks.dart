@@ -34,8 +34,7 @@ class _TasksPageState extends State<TasksPage> {
           },
           leftMargin: 20,
           monthColor: primaryColor,
-          dayColor: primaryColor,
-          //Theme.of(context).accentColor,
+          dayColor: Theme.of(context).accentColor,
           activeDayColor: primaryColor,
           dotsColor: primaryColor,
           // selectableDayPredicate: (date) => date.day != 23,
@@ -65,10 +64,13 @@ class _TasksPageState extends State<TasksPage> {
                     ),
                   )
                 : Center(
-                    child: Text("No Tasks Found...",
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            fontSize: 22, fontWeight: FontWeight.bold)),
-                  );
+                    child: Text(
+                    "No Tasks Found...",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineMedium!
+                        .copyWith(color: Colors.black),
+                  ));
           },
         ),
       ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/model/taskmodel.dart';
-import 'package:todo_app/pages/tasks_page/edit_task/edit_task_page.dart';
 import 'package:todo_app/provider/setting_provider.dart';
 import 'package:todo_app/shared-components/network/my_database.dart';
 import 'package:todo_app/shared-components/theme/color.dart';
@@ -48,14 +47,10 @@ class _TasksItemsState extends State<TasksItems> {
                 ),
               ),
               SlidableAction(
-                onPressed: (context) {
-                  Navigator.pushNamed(context, EditTaskScreen.routeName,
-                      arguments: widget.taskModel);
+                onPressed: (context) async {
+                  await MyDataBase.updateTask(
+                      widget.taskModel.id, widget.taskModel);
                 },
-                //     (context) async {
-                //   await MyDataBase.updateTask(
-                //       widget.taskModel.id, widget.taskModel);
-                // },
                 icon: Icons.edit,
                 label: "Edit",
                 backgroundColor: Colors.amber,
